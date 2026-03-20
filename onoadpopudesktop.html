@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile/Tablet Popup</title>
+    <style>
+      /* Onload Popup Start */
+.popuPPPForm_onload .popup-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(5px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999999;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.popuPPPForm_onload .popup-overlay.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Popup Container */
+.popuPPPForm_onload .popup-container {
+    background: linear-gradient(135deg, #0F1419 0%, #1E3A8A 50%, #4DA8DA 100%);
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55),opacity 0.4s ease;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.popuPPPForm_onload .popup-overlay.active .popup-container {
+	transform: scale(1);
+	opacity: 1;
+}
+
+/* Popup Content */
+.popuPPPForm_onload .popup-content {
+	padding: 40px 30px;
+	color: #fff;
+}
+
+/* Close Button */
+.popuPPPForm_onload .popup-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	width: 40px;
+	height: 40px;
+	background: rgba(255, 255, 255, 0.2);
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	z-index: 10;
+}
+
+.popuPPPForm_onload .popup-close:hover {
+	background: rgba(255, 255, 255, 0.3);
+	transform: rotate(90deg);
+}
+
+.popuPPPForm_onload .popup-close::before,
+.popuPPPForm_onload .popup-close::after {
+	content: '';
+	position: absolute;
+	width: 20px;
+	height: 2px;
+	background: #fff;
+}
+
+.popuPPPForm_onload .popup-close::before {
+	transform: rotate(45deg);
+}
+
+.popuPPPForm_onload .popup-close::after {
+	transform: rotate(-45deg);
+}
+
+/* Popup Header */
+.popuPPPForm_onload .popup-header {
+	text-align: center;
+	margin-bottom: 25px;
+}
+.popuPPPForm_onload br {
+    display: none;
+}
+.popuPPPForm_onload .popup-header h2 {
+	font-size: 28px;
+	font-weight: 700;
+	margin-bottom: 10px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.popuPPPForm_onload .popup-header p {
+	font-size: 16px;
+	opacity: 0.95;
+	line-height: 1.5;
+}
+
+/* Form Styling */
+.popuPPPForm_onload .popup-form {
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	padding: 25px;
+	border-radius: 15px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* CF7 Form Overrides */
+.popuPPPForm_onload .popup-form .wpcf7-form-control-wrap {
+	display: block;
+	margin-bottom: 15px;
+}
+
+.popuPPPForm_onload .popup-form input[type="text"],
+.popuPPPForm_onload .popup-form input[type="email"],
+.popuPPPForm_onload .popup-form input[type="tel"],
+.popuPPPForm_onload .popup-form textarea,
+.popuPPPForm_onload .popup-form select {
+	width: 100%;
+	padding: 12px 15px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.9);
+	font-size: 15px;
+	transition: all 0.3s ease;
+	color: #333;
+}
+
+.popuPPPForm_onload .popup-form input:focus,
+.popuPPPForm_onload .popup-form textarea:focus,
+.popuPPPForm_onload .popup-form select:focus {
+	outline: none;
+	border-color: #fff;
+	background: #fff;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.popuPPPForm_onload .popup-form textarea {
+    min-height: 90px;
+    resize: none;
+    height: 90px;
+}
+
+.popuPPPForm_onload .popup-form input[type="submit"] {
+	width: 100%;
+	padding: 14px;
+	background: #fff;
+	color: #667eea;
+	border: none;
+	border-radius: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	margin-top: 10px;
+}
+
+.popuPPPForm_onload .popup-form input[type="submit"]:hover {
+	background: #f0f0f0;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.popuPPPForm_onload .popup-container {
+		width: 95%;
+		max-height: 85vh;
+	}
+
+	.popuPPPForm_onload .popup-content {
+		padding: 30px 20px;
+	}
+
+	.popuPPPForm_onload .popup-header h2 {
+		font-size: 24px;
+	}
+
+	.popuPPPForm_onload .popup-header p {
+		font-size: 14px;
+	}
+
+	.popuPPPForm_onload .popup-form {
+		padding: 20px;
+	}
+}
+
+/* Loading Animation */
+.popuPPPForm_onload .popup-loading {
+	display: none;
+	text-align: center;
+	padding: 20px;
+}
+
+.popuPPPForm_onload .popup-loading.active {
+	display: block;
+}
+
+.popuPPPForm_onload .spinner {
+	border: 3px solid rgba(255, 255, 255, 0.3);
+	border-top: 3px solid #fff;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	animation: spin 1s linear infinite;
+	margin: 0 auto;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+/* Smooth Scrollbar */
+.popuPPPForm_onload .popup-container::-webkit-scrollbar {
+	width: 8px;
+}
+
+.popuPPPForm_onload .popup-container::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 10px;
+}
+
+.popup-container::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.5);
+	border-radius: 10px;
+}
+
+.popuPPPForm_onload .popup-container::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.7);
+}
+/* Onload Popup End */
+    </style>
+</head>
+<body>
+    <!-- Popup Overlay -->
+<div class="popuPPPForm_onload">
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-container">
+            <button class="popup-close" id="popupClose" aria-label="Close popup"></button>
+
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h2>Quick Enquiry </h2>
+                    <p> We’ll Get Back to You Soon!</p>
+                </div>
+
+                <div class="popup-form">
+                    <!-- Replace this comment with your CF7 shortcode -->
+                  [contact-form-7 id="cd526bc" title="Onload Popup Form"]
+
+                    <!-- Demo Form (Remove this when adding CF7) -->
+
+                </div>
+
+                <div class="popup-loading" id="popupLoading">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 15px;">Sending...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Mobile Popup JS -->
+ <!-- Onload Popup JS Start -->
+<script>
+    // Popup functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupClose = document.getElementById('popupClose');
+        // Show popup after page loads (delay optional)
+        setTimeout(function() {
+            popupOverlay.classList.add('active');
+        }, 1800); // 500ms delay, adjust as needed
+        // Close popup on button click
+        popupClose.addEventListener('click', function() {
+            closePopup();
+        });
+        // Close popup when clicking outside
+        popupOverlay.addEventListener('click', function(e) {
+            if (e.target === popupOverlay) {
+                closePopup();
+            }
+        });
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
+                closePopup();
+            }
+        });
+        function closePopup() {
+            popupOverlay.classList.remove('active');
+        }
+        // Show popup again (optional function)
+        window.showPopup = function() {
+            popupOverlay.classList.add('active');
+        };
+    });
+</script>
+<!-- Onload Popup JS End -->
+</body>
+</html>

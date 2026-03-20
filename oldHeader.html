@@ -1,0 +1,151 @@
+ <header class="NRJ_header_headerISSC">
+     <div class="header-container">
+         <div class="logo-wrapper">
+             <!-- Image logo -->
+             <div class="logo">
+                 <img id="headerLogo" src="./assets/img/logo.png" alt="ISSC Logo">
+             </div>
+         </div>
+
+         <div class="mobile-toggle" onclick="toggleMobileMenu()">
+             <span></span>
+             <span></span>
+             <span></span>
+         </div>
+
+         <nav class="nav-wrapper">
+             <ul class="main-nav">
+                 <li class="nav-item">
+                     <a href="https://isscindia.com" class="nav-link">Home</a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="https://isscindia.com/about-us.php" class="nav-link">About Us</a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="#" class="nav-link has-dropdown" onclick="toggleDropdown(event)">Products</a>
+                     <div class="dropdown-menu">
+                         <div class="dropdown-item has-submenu" onmouseenter="showSubmenu(this)"
+                             onmouseleave="hideSubmenu(this)" onclick="toggleSubmenu(event)">
+                             Shear
+                             <span class="submenu-arrow">›</span>
+                             <div class="sub-dropdown">
+                                 <a href="https://isscindia.com/container-continuous-shear.php"
+                                     class="dropdown-item">Container / Continuous Shear</a>
+                                 <a href="https://isscindia.com/gantry-shear.php" class="dropdown-item">Gantry
+                                     Shear</a>
+                                 <a href="https://isscindia.com/hydraulic-box-shear-machine.php"
+                                     class="dropdown-item">Hydraulic Box Shear Machine</a>
+                                 <a href="https://isscindia.com/alligator-shear.php" class="dropdown-item">Alligator
+                                     Shear</a>
+                             </div>
+                         </div>
+                         <div class="dropdown-item has-submenu" onmouseenter="showSubmenu(this)"
+                             onmouseleave="hideSubmenu(this)" onclick="toggleSubmenu(event)">
+                             Shredding Lines
+                             <span class="submenu-arrow">›</span>
+                             <div class="sub-dropdown">
+                                 <a href="https://isscindia.com/automatic-shredding-lines.php"
+                                     class="dropdown-item">Automatic Shredding Lines</a>
+                                 <a href="https://isscindia.com/automatic-elv-shredding-lines.php"
+                                     class="dropdown-item">Automatic ELV Shredding Lines</a>
+                                 <a href="https://isscindia.com/double-shaft-shredder.php" class="dropdown-item">Double
+                                     Shaft Shredder</a>
+                                 <a href="https://isscindia.com/hammer-mill-shredder.php" class="dropdown-item">Hammer
+                                     Mill Shredder</a>
+                             </div>
+                         </div>
+                         <a href="https://isscindia.com/hydraulic-scrap-baler-machine.php"
+                             class="dropdown-item">Hydraulic Scrap Baler Machine</a>
+                         <a href="https://isscindia.com/non-ferrous-sorting-line.php" class="dropdown-item">Non-Ferrous
+                             Sorting Line</a>
+                         <a href="https://isscindia.com/pyrolysis-tire-wire-shredding-line.php"
+                             class="dropdown-item">Pyrolysis Tire Wire Shredding Line</a>
+                         <a href="https://isscindia.com/lithium-battery-recycling-line.php"
+                             class="dropdown-item">Lithium Battery Recycling Line</a>
+                         <a href="https://isscindia.com/tire-shredding-line.php" class="dropdown-item">Tire Shredding
+                             Line</a>
+                         <a href="https://isscindia.com/scrap-handling.php" class="dropdown-item">Scrap Handling</a>
+                         <a href="https://isscindia.com/copper-mould-tubes.php" class="dropdown-item">Copper Mould
+                             Tubes</a>
+                     </div>
+                 </li>
+                 <li class="nav-item">
+                     <a href="https://isscindia.com/video-gallery.php" class="nav-link">Video Gallery</a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="https://isscindia.com/contact-us.php" class="nav-link">Contact Us</a>
+                 </li>
+             </ul>
+             <a href="./assets/img/catloge.pdf" download="ISSC_Brochure.pdf" class="download-btn">Download
+                 Brochure</a>
+
+         </nav>
+     </div>
+ </header>
+
+ <script>
+     // Header Start
+     // Sticky Header with Background Change
+     window.addEventListener('scroll', function() {
+         const header = document.querySelector('.NRJ_header_headerISSC');
+         if (window.scrollY > 50) {
+             header.classList.add('scrolled');
+         } else {
+             header.classList.remove('scrolled');
+         }
+     });
+     // Mobile Menu Toggle
+     function toggleMobileMenu() {
+         const navWrapper = document.querySelector('.nav-wrapper');
+         const mobileToggle = document.querySelector('.mobile-toggle');
+         navWrapper.classList.toggle('active');
+         mobileToggle.classList.toggle('active');
+     }
+     // Dropdown Toggle for Mobile
+     function toggleDropdown(event) {
+         if (window.innerWidth <= 768) {
+             event.preventDefault();
+             const navItem = event.target.closest('.nav-item');
+             navItem.classList.toggle('dropdown-active');
+         }
+     }
+     // Sub-menu toggle for mobile and desktop
+     function toggleSubmenu(event) {
+         if (window.innerWidth <= 768) {
+             event.preventDefault();
+             event.stopPropagation();
+             const submenuItem = event.currentTarget;
+             submenuItem.classList.toggle('active');
+         }
+     }
+     // Show submenu on hover (desktop)
+     function showSubmenu(element) {
+         if (window.innerWidth > 768) {
+             element.classList.add('active');
+         }
+     }
+     // Hide submenu when mouse leaves (desktop)
+     function hideSubmenu(element) {
+         if (window.innerWidth > 768) {
+             element.classList.remove('active');
+         }
+     }
+     // Close mobile menu when clicking outside
+     document.addEventListener('click', function(event) {
+         const header = document.querySelector('.NRJ_header_headerISSC');
+         const mobileToggle = document.querySelector('.mobile-toggle');
+         const navWrapper = document.querySelector('.nav-wrapper');
+         if (!header.contains(event.target)) {
+             navWrapper.classList.remove('active');
+             mobileToggle.classList.remove('active');
+         }
+     });
+     // Close mobile menu on window resize
+     window.addEventListener('resize', function() {
+         if (window.innerWidth > 768) {
+             document.querySelector('.nav-wrapper').classList.remove('active');
+             document.querySelector('.mobile-toggle').classList.remove('active');
+         }
+     });
+     // Header End
+ </script>
