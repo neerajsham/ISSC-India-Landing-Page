@@ -2,17 +2,17 @@
 
 A modern and responsive landing page for ISSC India, focused on ELV recycling and industrial solutions.
 
-## 🚀 Features
+## Features
 - Responsive Design
 - Clean UI
 - SEO Friendly
 - Multiple Landing Pages
 
-## 🛠️ Tech Stack
+## Tech Stack
 - HTML
 - CSS
 - JavaScript
 - PHP
 
-## 📌 Author
+## Author
 Neeraj Sharma
